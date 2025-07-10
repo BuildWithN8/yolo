@@ -31,11 +31,11 @@
                 <button class="cta-button" onclick="showDogFact()">Get a Dog Fact!</button>
             </div>
             <div class="hero-visual">
-                <div class="floating-elements">
-                    <div class="element">🐕</div>
-                    <div class="element">🦴</div>
-                    <div class="element">🎾</div>
-                    <div class="element">🐾</div>
+                <div class="floating-elements" role="img" aria-label="Decorative dog-themed animations">
+                    <div class="element" aria-label="Dog emoji">🐕</div>
+                    <div class="element" aria-label="Bone emoji">🦴</div>
+                    <div class="element" aria-label="Tennis ball emoji">🎾</div>
+                    <div class="element" aria-label="Paw prints emoji">🐾</div>
                 </div>
             </div>
         </section>
@@ -114,13 +114,13 @@
                 <div class="contact-content">
                     <p>Join our community of dog enthusiasts and share your furry friend's stories!</p>
                     <div class="contact-form">
-                        <input type="email" placeholder="Enter your email" id="emailInput">
-                        <button onclick="joinDogCommunity()">Join Community</button>
+                        <input type="email" placeholder="Enter your email" id="emailInput" aria-label="Email address for joining dog community">
+                        <button onclick="joinDogCommunity()" aria-label="Join the dog community">Join Community</button>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link">🐕 Dog Facebook</a>
-                        <a href="#" class="social-link">📸 Dog Instagram</a>
-                        <a href="#" class="social-link">🐦 Dog Twitter</a>
+                        <a href="#" class="social-link" aria-label="Follow us on Facebook for dog content">🐕 Dog Facebook</a>
+                        <a href="#" class="social-link" aria-label="Follow us on Instagram for dog photos">📸 Dog Instagram</a>
+                        <a href="#" class="social-link" aria-label="Follow us on Twitter for dog updates">🐦 Dog Twitter</a>
                     </div>
                 </div>
             </div>
@@ -133,6 +133,7 @@
         </div>
     </footer>
 
+    <script src="utils.js"></script>
     <script src="dog-script.js"></script>
 </body>
 </html>

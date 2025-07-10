@@ -17,17 +17,24 @@ function showDogFact() {
     const randomFact = dogFacts[Math.floor(Math.random() * dogFacts.length)];
     showNotification(randomFact);
     
-    // Add bounce animation to the button
-    const button = document.querySelector('.cta-button');
-    button.classList.add('bounce');
-    setTimeout(() => {
-        button.classList.remove('bounce');
-    }, 2000);
+    // Add bounce animation to the button with safety check
+    const button = safeQuerySelector('.cta-button');
+    if (button) {
+        button.classList.add('bounce');
+        setTimeout(() => {
+            button.classList.remove('bounce');
+        }, 2000);
+    }
 }
 
 // Join dog community functionality
 function joinDogCommunity() {
     const emailInput = document.getElementById('emailInput');
+    if (!emailInput) {
+        showNotification('🚨 Error: Email input not found!', 'error');
+        return;
+    }
+    
     const email = emailInput.value.trim();
     
     if (email === '') {
@@ -48,45 +55,7 @@ function joinDogCommunity() {
     createDogConfetti();
 }
 
-// Email validation
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-// Show notification
-function showNotification(message, type = 'success') {
-    // Remove existing notification if any
-    const existingNotification = document.querySelector('.notification');
-    if (existingNotification) {
-        existingNotification.remove();
-    }
-    
-    // Create new notification
-    const notification = document.createElement('div');
-    notification.className = 'notification';
-    notification.textContent = message;
-    
-    // Style based on type
-    if (type === 'error') {
-        notification.style.background = 'linear-gradient(45deg, #f44336, #d32f2f)';
-    }
-    
-    document.body.appendChild(notification);
-    
-    // Show notification with animation
-    setTimeout(() => {
-        notification.classList.add('show');
-    }, 100);
-    
-    // Hide notification after 4 seconds
-    setTimeout(() => {
-        notification.classList.remove('show');
-        setTimeout(() => {
-            notification.remove();
-        }, 300);
-    }, 4000);
-}
+// Email validation and notification functions are now in utils.js
 
 // Create dog-themed confetti effect
 function createDogConfetti() {
@@ -120,60 +89,29 @@ function createDogConfetti() {
     }
 }
 
-// Smooth scrolling for navigation links
+// Smooth scrolling for navigation links (using shared utility)
 document.addEventListener('DOMContentLoaded', function() {
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            // Don't prevent default for external links (like index.html)
-            if (this.getAttribute('href').startsWith('#')) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            }
-        });
-    });
+    setupSmoothNavigation();
 });
 
-// Add parallax effect to floating elements
-window.addEventListener('scroll', function() {
+// Add parallax effect to floating elements with debouncing for performance
+const dogParallaxEffect = debounce(function() {
     const scrolled = window.pageYOffset;
     const rate = scrolled * -0.5;
     
-    const floatingElements = document.querySelectorAll('.element');
+    const floatingElements = safeQuerySelectorAll('.element');
     floatingElements.forEach((element, index) => {
         const speed = (index + 1) * 0.3;
         element.style.transform = `translateY(${rate * speed}px)`;
     });
-});
+}, 16); // ~60fps
 
-// Add typing effect to hero text
-function typeWriter(element, text, speed = 100) {
-    let i = 0;
-    element.innerHTML = '';
-    
-    function type() {
-        if (i < text.length) {
-            element.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(type, speed);
-        }
-    }
-    
-    type();
-}
+window.addEventListener('scroll', dogParallaxEffect);
 
-// Initialize typing effect when page loads
+// Initialize typing effect when page loads (using utils.js typeWriter)
 window.addEventListener('load', function() {
-    const heroTitle = document.querySelector('.hero-content h2');
-    const heroSubtitle = document.querySelector('.hero-content h3');
+    const heroTitle = safeQuerySelector('.hero-content h2');
+    const heroSubtitle = safeQuerySelector('.hero-content h3');
     
     if (heroTitle && heroSubtitle) {
         const originalTitle = heroTitle.textContent;
@@ -188,7 +126,7 @@ window.addEventListener('load', function() {
 
 // Add hover effects to cards
 document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.about-card, .feature-card');
+    const cards = safeQuerySelectorAll('.about-card, .feature-card');
     
     cards.forEach(card => {
         card.addEventListener('mouseenter', function() {
@@ -214,9 +152,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Add random animations to floating elements
-setInterval(function() {
-    const elements = document.querySelectorAll('.element');
+// Add random animations to floating elements with managed intervals
+createManagedInterval(function() {
+    const elements = safeQuerySelectorAll('.element');
     const animations = ['bounce', 'float', 'pulse'];
     
     elements.forEach(element => {
