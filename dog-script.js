@@ -1,21 +1,21 @@
-// Motivational quotes for the YOLO BOLO experience
-const motivationalQuotes = [
-    "🚀 You are capable of amazing things! Keep pushing forward!",
-    "⭐ Every moment is a chance to create something extraordinary!",
-    "🎯 Your dreams are valid. Chase them with passion!",
-    "💫 Success is not final, failure is not fatal: it's courage that counts!",
-    "🌟 Be yourself; everyone else is already taken!",
-    "🔥 The only impossible journey is the one you never begin!",
-    "💎 You don't have to be great to get started, but you have to get started to be great!",
-    "🌈 Life is 10% what happens to you and 90% how you react to it!",
-    "🎪 Make today so awesome that yesterday gets jealous!",
-    "🦋 Don't wait for opportunity. Create it!"
+// Fun dog facts for the Dog World experience
+const dogFacts = [
+    "🐕 Dogs have unique nose prints, just like human fingerprints!",
+    "🦴 A dog's mouth exerts 150-200 pounds of pressure per square inch!",
+    "🎾 Dogs can learn over 1,000 words and can count up to four or five!",
+    "🐾 Puppies are born deaf and blind, but their hearing is so sharp they can hear sounds at frequencies twice as high as humans!",
+    "🏃 Greyhounds can run up to 45 miles per hour!",
+    "💤 Dogs curl up in a ball when they sleep to conserve body heat and protect vital organs!",
+    "🌈 Dogs can see colors, but not as many as humans - they see blues and yellows best!",
+    "🎵 Dogs have a sense of time and can predict future events like walks and feeding times!",
+    "❤️ Petting a dog can lower your blood pressure and reduce stress!",
+    "🧠 Dogs are as smart as a 2-year-old child and can learn by watching other dogs!"
 ];
 
-// Show random motivational message
-function showMotivation() {
-    const randomQuote = motivationalQuotes[Math.floor(Math.random() * motivationalQuotes.length)];
-    showNotification(randomQuote);
+// Show random dog fact
+function showDogFact() {
+    const randomFact = dogFacts[Math.floor(Math.random() * dogFacts.length)];
+    showNotification(randomFact);
     
     // Add bounce animation to the button with safety check
     const button = safeQuerySelector('.cta-button');
@@ -27,8 +27,8 @@ function showMotivation() {
     }
 }
 
-// Join movement functionality
-function joinMovement() {
+// Join dog community functionality
+function joinDogCommunity() {
     const emailInput = document.getElementById('emailInput');
     if (!emailInput) {
         showNotification('🚨 Error: Email input not found!', 'error');
@@ -47,30 +47,28 @@ function joinMovement() {
         return;
     }
     
-    // Simulate joining the movement
-    showNotification('🎉 Welcome to the YOLO BOLO movement! Get ready to live boldly!', 'success');
+    // Simulate joining the dog community
+    showNotification('🐕 Welcome to the Dog World community! Get ready for pawsome content!', 'success');
     emailInput.value = '';
     
     // Add some celebration effects
-    createConfetti();
+    createDogConfetti();
 }
 
 // Email validation and notification functions are now in utils.js
 
-// Create confetti effect
-function createConfetti() {
-    const colors = ['#ff6b6b', '#ffa500', '#ffeb3b', '#4caf50', '#2196f3', '#9c27b0'];
+// Create dog-themed confetti effect
+function createDogConfetti() {
+    const dogEmojis = ['🐕', '🦴', '🎾', '🐾', '🏠', '❤️'];
     
-    for (let i = 0; i < 50; i++) {
+    for (let i = 0; i < 30; i++) {
         const confetti = document.createElement('div');
         confetti.style.position = 'fixed';
-        confetti.style.width = '10px';
-        confetti.style.height = '10px';
-        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.fontSize = '20px';
+        confetti.textContent = dogEmojis[Math.floor(Math.random() * dogEmojis.length)];
         confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = '-10px';
+        confetti.style.top = '-30px';
         confetti.style.zIndex = '9999';
-        confetti.style.borderRadius = '50%';
         confetti.style.pointerEvents = 'none';
         
         document.body.appendChild(confetti);
@@ -91,13 +89,13 @@ function createConfetti() {
     }
 }
 
-// Smooth scrolling for navigation links (FIXED - was breaking external links)
+// Smooth scrolling for navigation links (using shared utility)
 document.addEventListener('DOMContentLoaded', function() {
     setupSmoothNavigation();
 });
 
 // Add parallax effect to floating elements with debouncing for performance
-const parallaxEffect = debounce(function() {
+const dogParallaxEffect = debounce(function() {
     const scrolled = window.pageYOffset;
     const rate = scrolled * -0.5;
     
@@ -108,7 +106,7 @@ const parallaxEffect = debounce(function() {
     });
 }, 16); // ~60fps
 
-window.addEventListener('scroll', parallaxEffect);
+window.addEventListener('scroll', dogParallaxEffect);
 
 // Initialize typing effect when page loads (using utils.js typeWriter)
 window.addEventListener('load', function() {
@@ -148,26 +146,29 @@ document.addEventListener('DOMContentLoaded', function() {
     if (emailInput) {
         emailInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter') {
-                joinMovement();
+                joinDogCommunity();
             }
         });
     }
 });
 
-// Add random color changes to floating elements with managed intervals
+// Add random animations to floating elements with managed intervals
 createManagedInterval(function() {
     const elements = safeQuerySelectorAll('.element');
-    const colors = ['#ff6b6b', '#ffa500', '#ffeb3b', '#4caf50', '#2196f3', '#9c27b0'];
+    const animations = ['bounce', 'float', 'pulse'];
     
     elements.forEach(element => {
-        const randomColor = colors[Math.floor(Math.random() * colors.length)];
-        element.style.textShadow = `0 0 20px ${randomColor}`;
+        const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+        element.style.animation = `${randomAnimation} 2s ease-in-out`;
+        setTimeout(() => {
+            element.style.animation = 'float 6s ease-in-out infinite';
+        }, 2000);
     });
-}, 3000);
+}, 5000);
 
 // Add welcome message when page loads
 window.addEventListener('load', function() {
     setTimeout(() => {
-        showNotification('🎉 Welcome to YOLO BOLO! Ready to live your best life?');
+        showNotification('🐕 Welcome to Dog World! Ready to learn about our furry friends?');
     }, 2000);
 });

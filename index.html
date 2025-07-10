@@ -16,6 +16,7 @@
                 <li><a href="#home">Home</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#features">Features</a></li>
+                <li><a href="dog.html">Dog World</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -30,11 +31,11 @@
                 <button class="cta-button" onclick="showMotivation()">Get Motivated!</button>
             </div>
             <div class="hero-visual">
-                <div class="floating-elements">
-                    <div class="element">🚀</div>
-                    <div class="element">⭐</div>
-                    <div class="element">🎯</div>
-                    <div class="element">💫</div>
+                <div class="floating-elements" role="img" aria-label="Decorative motivational animations">
+                    <div class="element" aria-label="Rocket emoji">🚀</div>
+                    <div class="element" aria-label="Star emoji">⭐</div>
+                    <div class="element" aria-label="Target emoji">🎯</div>
+                    <div class="element" aria-label="Sparkles emoji">💫</div>
                 </div>
             </div>
         </section>
@@ -93,13 +94,13 @@
                 <div class="contact-content">
                     <p>Ready to transform your life? Connect with us and start your journey today!</p>
                     <div class="contact-form">
-                        <input type="email" placeholder="Enter your email" id="emailInput">
-                        <button onclick="joinMovement()">Join Now</button>
+                        <input type="email" placeholder="Enter your email" id="emailInput" aria-label="Email address for joining YOLO BOLO movement">
+                        <button onclick="joinMovement()" aria-label="Join the YOLO BOLO movement">Join Now</button>
                     </div>
                     <div class="social-links">
-                        <a href="#" class="social-link">📘 Facebook</a>
-                        <a href="#" class="social-link">🐦 Twitter</a>
-                        <a href="#" class="social-link">📸 Instagram</a>
+                        <a href="#" class="social-link" aria-label="Follow us on Facebook">📘 Facebook</a>
+                        <a href="#" class="social-link" aria-label="Follow us on Twitter">🐦 Twitter</a>
+                        <a href="#" class="social-link" aria-label="Follow us on Instagram">📸 Instagram</a>
                     </div>
                 </div>
             </div>
@@ -112,6 +113,7 @@
         </div>
     </footer>
 
+    <script src="utils.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
